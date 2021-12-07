@@ -79,7 +79,6 @@ class MainViewModel : ViewModel() {
                     e.printStackTrace()
                     Log.d("downloadZipFile", "Error " + e.message)
                 }
-
                 override fun onComplete() {
                     Log.d("TAG", "onComplete: ")
                 }
