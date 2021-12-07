@@ -69,27 +69,7 @@ class MainViewModel : ViewModel() {
         appRepository.downloadFile(attachment)
             .flatMap { responseBodyResponse ->
                 Observable.create<File> { emitter ->
-                    try {
-                        // you can access headers of response
-                        val header = responseBodyResponse.headers()["Content-Disposition"]
-                        // this is specific case, it's up to you how you want to save your file
-                        // if you are not downloading file from direct link, you might be lucky to obtain file name from header
-                        val fileName = header!!.replace("attachment; filename=", "")
-                        // will create file in global Music directory, can be any other directory, just don't forget to handle permissions
-                        val file = File(
-                            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).absoluteFile,
-                            fileName
-                        )
-                        val sink = file.sink().buffer()
-                        // you can access body of response
-                        sink.writeAll(responseBodyResponse.body()!!.source())
-                        sink.close()
-                        emitter.onNext(file)
-                        emitter.onComplete()
-                    } catch (e: IOException) {
-                        e.printStackTrace()
-                        emitter.onError(e)
-                    }
+
                 }
             }
             .subscribeOn(Schedulers.io())
