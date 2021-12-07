@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun observeIsLoading(){
-        mainViewModel.appRepository.isLoading.observe(this, Observer { isLoading ->
+        mainViewModel.isLoading.observe(this, Observer { isLoading ->
             isLoading.let {
                 if (it){
                     empty_text.visibility = View.GONE
@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun observeHasError(){
-        mainViewModel.appRepository.hasError.observe(this, Observer { hasError ->
+        mainViewModel.hasError.observe(this, Observer { hasError ->
             hasError.let {
                 if (it){
                     disableViewsOnError()
@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun observeAttachmentsList(){
-        mainViewModel.appRepository.attachments.observe(this, Observer { attachments ->
+        mainViewModel.attachments.observe(this, Observer { attachments ->
             attachments.let {
                 if (it != null && it .isNotEmpty()){
                     attachmentsRV.visibility = View.VISIBLE
